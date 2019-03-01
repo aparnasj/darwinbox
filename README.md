@@ -1,6 +1,6 @@
-# Darwin Box Assignment
+# Google Oauth Assignment
 
-Dawrwin Box Login Assignment
+Google Oauth Login Assignment
 
 ## Getting Started
 
@@ -36,10 +36,10 @@ $ npm install
 ```
 
 ```
-Create a database with name 'darwinbox'
+Create a database with name 'googleOauth'
 ```
 
-### Running
+### Run project
 
 To create initial whitelisted email database. Run the following script.
 
