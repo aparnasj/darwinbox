@@ -17,7 +17,7 @@ const ClientId = config.googleCredentials.clientId;
 const ClientSecret = config.googleCredentials.clientSecret;
 const RedirectionUrl = "http://localhost:6001/oauth/callback";
 
-let mongoDB = "mongodb://127.0.0.1:27017/darwinbox"; // This is mondodb connection url. darwinbox is the database name
+let mongoDB = "mongodb://127.0.0.1:27017/googleOauth"; // This is mondodb connection url. googleOauth is the database name
 
 mongoose.connect(mongoDB, { useNewUrlParser: true } ); // This will connect to mondogb.
 
