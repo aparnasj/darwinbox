@@ -1,0 +1,21 @@
+{
+  "name": "samplemongo",
+  "version": "1.0.0",
+  "description": "",
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "googleapis": "^37.2.0",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.10",
+    "morgan": "^1.9.1",
+    "package.json": "^2.0.1",
+    "uuid": "^3.3.2"
+  }
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+        }
+
+        .header {
+            width: 100%;
+            position: fixed;
+            border-bottom: 1px solid #e2e5e8;
+            background: #FFF;
+        }
+
+        .profile-info img {
+            width: 32px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .profile-info {
+            float: right;
+        }
+
+        .profile-info .title {
+            font-size: 14px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .title {
+            margin-right: 1px !important;
+            font-weight: 100;
+            color: #444;
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        .center-div {
+            padding: 20px;
+            width: 400px;
+            height: 200px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        #successMessage {
+            color: #5aa6fd;
+            font-size: 14px;
+            font-weight: 100;
+            padding: 10px;
+            margin: 10px;
+            background: #00000008;
+            border-radius: 4px;
+            display: none;
+        }
+
+        #errorMessage {
+            color: #fd6d4f;
+            font-size: 14px;
+            font-weight: 100;
+            padding: 10px;
+            margin: 10px;
+            background: #00000008;
+            border-radius: 4px;
+            display: none;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="/static/libs/bootstrap4/css/bootstrap.css">
+</head>
+<body>
+<div class="header">
+    <div class="profile-info" style="margin-right: 10px;">
+        <img src="/static/assets/images/user.svg">
+        <div class="title" id="titleVal"></div>
+        <span onclick='logout()' style="cursor: pointer">
+            <img src="/static/assets/images/power-button-icon.png">
+        </span>
+    </div>
+</div>
+
+<div class="center-div">
+    <div class="title">Whitelist Email</div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+        </div>
+        <input type="email" id="emailId" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <button type="button" onclick='whitelist()' class="btn btn-primary">Whitelist</button>
+    <div id="successMessage"></div>
+    <div id="errorMessage"></div>
+</div>
+<script src="/static/libs/jquery.js"></script>
+<script src="/static/libs/bootstrap4/css/bootstrap.js"></script>
+<script>
+    var params = (new URL(document.location)).searchParams;
+
+    $( document ).ready(function() {
+        $.ajax({
+            url: '/api/getProfile',
+            dataType: 'json',
+            type: 'get',
+            headers: {
+                Authorization: params.get('token')
+            },
+            success: function (data, textStatus, jQxhr) {
+                if (data.userInfo.firstName) {
+                    $('#titleVal').html(data.userInfo.firstName + ' ' + data.userInfo.lastName);
+                } else {
+                    $('#titleVal').html(data.mail);
+                }
+
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("error in fetching google oauth");
+            }
+        });
+    });
+    function whitelist() {
+        $.ajax({
+            url: '/api/createuser',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            headers: {
+                Authorization: params.get('token')
+            },
+            data: JSON.stringify({emailId: $('#emailId').val()}),
+            success: function (data, textStatus, jQxhr) {
+                $('#emailId').val('');
+                $('#successMessage').html('User whitelisted succesfully');
+                $('#successMessage').show();
+                setTimeout(function () {
+                    $('#successMessage').html('');
+                    $('#successMessage').hide();
+                }, 3000);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                $('#errorMessage').html('Error in whitelisting email id');
+                $('#errorMessage').show();
+                setTimeout(function () {
+                    $('#errorMessage').html('');
+                    $('#errorMessage').hide();
+                }, 3000);
+            }
+        });
+    }
+    function logout() {
+        window.location = './index.html'
+    }
+
+</script>
+</body>
+</html>
