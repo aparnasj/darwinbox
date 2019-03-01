@@ -52,6 +52,7 @@ node src/db/scripts/initdb.js
 To run project enter the following command
 
 ```
+$ cd src
 $ node app.js
 ```
 
