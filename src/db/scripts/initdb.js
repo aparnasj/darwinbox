@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const _ = require('lodash');
 
-let mongoDB = "mongodb://127.0.0.1:27017/darwinbox"; // This is mondodb connection url. darwinbox is the database name
+let mongoDB = "mongodb://127.0.0.1:27017/googleOauth"; // This is mondodb connection url. googleOauth is the database name
 
 mongoose.connect(mongoDB, { useNewUrlParser: true } ); // This will connect to mondogb.
 
@@ -13,7 +13,7 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-var emails = ['aparna.sharma@tresmlabs.com', 'appu.2410@gmail.com']; //add default addresses here
+var emails = ['xyz@gmail.com', 'appu.2410@gmail.com']; //add default addresses here
 
 var users = [];
 _.map(emails, function (email) {
